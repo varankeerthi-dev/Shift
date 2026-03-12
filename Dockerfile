@@ -8,8 +8,11 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && docker-php-ext-install pdo pdo_pgsql
 
-# copy backend code
-COPY backend /var/www
+# copy full repo
+COPY . /var/www
+
+# move into Laravel backend folder
+WORKDIR /var/www/backend
 
 # install composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
